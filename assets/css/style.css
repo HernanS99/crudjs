@@ -2,3 +2,7 @@
     min-height: 400px;
     background: transparent;
     }
+
+    form {
+        position: relative;
+    }
