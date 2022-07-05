@@ -41,34 +41,48 @@ console.log(usuario1) */
 
 
 let listUsers = [];
-
+impUser();
 
 document.querySelector('#btnEnviar').addEventListener('click', saveUser)
 
 function saveUser (){
-    let Unick = document.querySelector('#nick').value,
-         Uage = document.querySelector('#age').value,
-        Umail = document.querySelector('#mail').value;
+    const unick = document.querySelector('#nick').value,
+        uage = document.querySelector('#age').value,
+        umail = document.querySelector('#mail').value;
        
-        addUser(Unick,Uage,Umail);
+        addUser(unick,uage,umail);
         impUser();
 }
 
 function addUser(unick,uage,umail)
 {
-    let User = {
+    const User = {
         nick : unick,
         age : uage,
         mail : umail
     };
-    console.log(User);
     listUsers.push(User);
+    localStoragelistusers(listUsers);
 }
 
 function getUserList() {
+    let storedList = localStorage.getItem('locallistusers')
+    /* if(storedList == null){
+        listUsers = [];
+    }else{
+        listUsers = JSON.parse(storedList);  
+    } */
+
+    listUsers = storedList == null ? [] : JSON.parse(storedList);
+    /* listUsers = storedList == null && [] */
+    
     return listUsers;
 }
 
+function localStoragelistusers(ulist)
+{
+    localStorage.setItem('locallistusers', JSON.stringify(ulist));
+}
 
 function impUser(){
     let list = getUserList(),
@@ -76,8 +90,7 @@ function impUser(){
 
         tbody.innerHTML = '';
 
-    for (let i=0; i < list.length;i++)
-    {
+    for (let i=0; i < list.length;i++){
         let row = tbody.insertRow(i);
         let nickCell = row.insertCell(0);
         let ageCell = row.insertCell(1);
@@ -85,8 +98,6 @@ function impUser(){
         nickCell.innerHTML = list[i].nick;
         ageCell.innerHTML = list[i].age;
         mailCell.innerHTML = list[i].mail;
-
-
         tbody.appendChild(row);
     }
 
