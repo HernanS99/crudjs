@@ -52,6 +52,10 @@ function saveUser (){
        
         addUser(unick,uage,umail);
         impUser();
+
+        
+
+
 }
 
 function addUser(unick,uage,umail)
@@ -61,8 +65,22 @@ function addUser(unick,uage,umail)
         age : uage,
         mail : umail
     };
-    listUsers.push(User);
-    localStoragelistusers(listUsers);
+    let list = getUserList();
+    let resul = list.filter(function(list){
+        return list.nick === unick
+    })
+    console.log(resul)
+    if(resul.length>0)
+    {
+        notifacion = document.querySelector('#notificionn div');
+        notifacion.innerHTML = 'NotificationJS.warning("ingrese nick no existente", persistent);';
+    } else{
+        listUsers.push(User);
+        localStoragelistusers(listUsers);
+    }
+
+    
+   
 }
 
 function getUserList() {
