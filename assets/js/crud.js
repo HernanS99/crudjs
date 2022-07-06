@@ -121,4 +121,12 @@ function impUser(){
 
 }
 
+function deleteUser (unick) 
+{
+    let list = getUserList();
+    let resul = list.filter(element => element.nick !== unick)
+    console.log(resul)
+    localStoragelistusers(resul);
+}
+
 
