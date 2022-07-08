@@ -6,3 +6,10 @@
     form {
         position: relative;
     }
+
+    #button{
+        border-style: inherit;
+        color: black;
+        padding: 10px 23px;
+        border-radius: 4px;
+    }
