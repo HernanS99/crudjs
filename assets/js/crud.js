@@ -1,73 +1,26 @@
-/* class Usuario {
-    constructor (name,age,mail){
-        this.name = name;
-        this.age = age;
-        this.mail = mail;
-    }
-    get parameters () {
-        return `${this.name} ${this.age} ${this.mail}`;
-    }
-    set parameters (parameters){
-        for (let parameter in parameters)
-        {
-            this[parameter] = parameters[parameter]
-        }
-    }
-    
-    
-}
-
-let formulario = document.getElementsByName('formulario')[0];
-let elementos = formulario.elements;
-let boton = document.getElementById('btnEnviar');
-let id = 0;
-function adduser(){
-    id = id++;
-    Usuario.parameters = {
-        name : document.getElementById('name').value,
-        age : document.getElementById('age').value,
-        mail : document.getElementById('mail').value
-    }
-    localStorage.setItem(`${id}`,JSON.stringify(Usuario.parameters));
-}
-function printUser(){
-    console.log(Usuario.parameter);
-}
-formulario.addEventListener("submit",adduser);
-
-
-let usuario1 = JSON.parse(localStorage.getItem("asd"));
-console.log(usuario1) */
 
 
 let listUsers = [];
 impUser();
+let editMode = false;
 
 document.querySelector('#btnEnviar').addEventListener('click', saveUser)
-
+document.querySelector('#btnEditar').addEventListener('click', saveEditUser) 
 
 let bottondelete = Array.from(document.getElementsByClassName('buttonDelete'));
-/* console.log(bottondeletes) */
+
 bottondelete.forEach(element => {
-    /* console.log(element); */
+
     element.addEventListener('click', (event) => deleteUser(event.target.id))
 });
 
+
 let bottonEdit = Array.from(document.getElementsByClassName('buttonEdit'));
-/* console.log(bottondeletes) */
+
 bottonEdit.forEach(element => {
-    /* console.log(element); */
+ 
     element.addEventListener('click', (event) => editUser(event.target.id))
 });
-
-let bottonSaveEdit = Array.from(document.getElementsByClassName('btnEditar'));
-/* console.log(bottondeletes) */
-bottonSaveEdit.forEach(element => {
-    /* console.log(element); */
-    element.addEventListener('click', (event) => saveEditUser(event.target.id))
-});
-
-
 
 
 
@@ -86,21 +39,31 @@ function saveUser() {
         } else {
             addUser(unick, uage, umail);
             impUser();
+            document.querySelector('#nick').value = "";
+            document.querySelector('#age').value = "";
+            document.querySelector('#mail').value = "";
         }
     
 }
 
-/* function saveEditUser(unick) {
-  
+function saveEditUser() {
+    let unick = document.querySelector('#nick').value,
+    uage = document.querySelector('#age').value,
+    umail = document.querySelector('#mail').value;
+    let uunick = unick;
+   
     let list = getUserList();
-    let resul = list.forEach(element => element.nick === unick,
-        console.log(resul)
-        )
-    
-
-       
-    
-} */
+    const index = list.findIndex(element=>element.nick===unick);
+    const User = {
+        nick: uunick,
+        age: uage,
+        mail: umail
+    };
+    console.log(index)
+    list[index] = User;
+    localStoragelistusers(list);
+    impUser();
+}
 
 function addUser(unick, uage, umail) {
     const User = {
@@ -154,7 +117,6 @@ function impUser() {
         inputEditSelect.className = "buttonEdit";
         inputEditSelect.id = list[i].nick;
         inputEditSelect.value = "editar";
-        /* inputEditSelect.value = list[i].nick; */
         selectEditCell.appendChild(inputEditSelect);
 
         let inputDeleteSelect = document.createElement('input')
@@ -162,7 +124,6 @@ function impUser() {
         inputDeleteSelect.className = "buttonDelete";
         inputDeleteSelect.id = list[i].nick;
         inputDeleteSelect.value = "eliminar";
-        /* inputDeleteSelect.value = list[i].nick; */
         selectDeleteCell.appendChild(inputDeleteSelect);
 
 
@@ -174,6 +135,12 @@ function impUser() {
         /* console.log(element); */
         element.addEventListener('click', (event) => deleteUser(event.target.id))
     });
+    let bottonEdit = Array.from(document.getElementsByClassName('buttonEdit'));
+
+bottonEdit.forEach(element => {
+ 
+    element.addEventListener('click', (event) => editUser(event.target.id))
+});
 
 }
 
@@ -193,16 +160,15 @@ function deleteUser(unick) {
 function editUser(unick) {
     let list = getUserList();
     let resul = list.filter(element => element.nick === unick)
-    console.log(resul[0].nick)
-   
-
     inputName = document.getElementById("nick");
     inputAge = document.getElementById("age");
     inputMail = document.getElementById("mail");
-    buttonEnviar = document.getElementById("btnEnviar");
+   /*  buttonEnviar = document.getElementById("btnEnviar"); */
     inputName.value = `${resul[0].nick}`;
     inputAge.value = `${resul[0].age}`;
     inputMail.value = `${resul[0].mail}`;
-    buttonEnviar.value = "Confirmar"
-    buttonEnviar.id="btnEditar"
-}
+    /* buttonEnviar.value = "Confirmar"
+    /* buttonEnviar.className=""; */
+   /*  buttonEnviar.id="btnEditar" */ 
+} 
+
