@@ -5,7 +5,7 @@ impUser();
 let editMode = false;
 
 document.querySelector('#btnEnviar').addEventListener('click', saveUser)
-document.querySelector('#btnEditar').addEventListener('click', saveEditUser) 
+document.querySelector('#btnEditar').addEventListener('click', saveEditUser)
 
 let bottondelete = Array.from(document.getElementsByClassName('buttonDelete'));
 
@@ -18,7 +18,7 @@ bottondelete.forEach(element => {
 let bottonEdit = Array.from(document.getElementsByClassName('buttonEdit'));
 
 bottonEdit.forEach(element => {
- 
+
     element.addEventListener('click', (event) => editUser(event.target.id))
 });
 
@@ -29,31 +29,37 @@ function saveUser() {
     const unick = document.querySelector('#nick').value,
         uage = document.querySelector('#age').value,
         umail = document.querySelector('#mail').value;
+    if (unick.value === "" || uage.value === "" || umail.value === "") {
+        alert("Debe rellenar todos los campos")
+        console.log("asdasd")
+    }
+    else {
         let list = getUserList();
         let resul = list.filter(function (list) {
             return list.nick === unick
         })
-    
         if (resul.length > 0) {
-    
+            alert("Nick ya ingresado")
         } else {
             addUser(unick, uage, umail);
             impUser();
+            
             document.querySelector('#nick').value = "";
             document.querySelector('#age').value = "";
             document.querySelector('#mail').value = "";
+           
         }
-    
+    }
 }
 
 function saveEditUser() {
     let unick = document.querySelector('#nick').value,
-    uage = document.querySelector('#age').value,
-    umail = document.querySelector('#mail').value;
+        uage = document.querySelector('#age').value,
+        umail = document.querySelector('#mail').value;
     let uunick = unick;
-   
+
     let list = getUserList();
-    const index = list.findIndex(element=>element.nick===unick);
+    const index = list.findIndex(element => element.nick === unick);
     const User = {
         nick: uunick,
         age: uage,
@@ -63,6 +69,11 @@ function saveEditUser() {
     list[index] = User;
     localStoragelistusers(list);
     impUser();
+    inputName = document.getElementById("nick");
+    document.querySelector('#nick').value = "";
+    document.querySelector('#age').value = "";
+    document.querySelector('#mail').value = "";
+    inputName.disabled= false;
 }
 
 function addUser(unick, uage, umail) {
@@ -114,14 +125,14 @@ function impUser() {
 
         let inputEditSelect = document.createElement('input')
         inputEditSelect.type = "button";
-        inputEditSelect.className = "buttonEdit";
+        inputEditSelect.className = "buttonEdit btn btn-primary";
         inputEditSelect.id = list[i].nick;
         inputEditSelect.value = "editar";
         selectEditCell.appendChild(inputEditSelect);
 
         let inputDeleteSelect = document.createElement('input')
         inputDeleteSelect.type = "button";
-        inputDeleteSelect.className = "buttonDelete";
+        inputDeleteSelect.className = "buttonDelete btn btn-primary";
         inputDeleteSelect.id = list[i].nick;
         inputDeleteSelect.value = "eliminar";
         selectDeleteCell.appendChild(inputDeleteSelect);
@@ -137,10 +148,10 @@ function impUser() {
     });
     let bottonEdit = Array.from(document.getElementsByClassName('buttonEdit'));
 
-bottonEdit.forEach(element => {
- 
-    element.addEventListener('click', (event) => editUser(event.target.id))
-});
+    bottonEdit.forEach(element => {
+
+        element.addEventListener('click', (event) => editUser(event.target.id))
+    });
 
 }
 
@@ -163,12 +174,13 @@ function editUser(unick) {
     inputName = document.getElementById("nick");
     inputAge = document.getElementById("age");
     inputMail = document.getElementById("mail");
-   /*  buttonEnviar = document.getElementById("btnEnviar"); */
+    /*  buttonEnviar = document.getElementById("btnEnviar"); */
     inputName.value = `${resul[0].nick}`;
     inputAge.value = `${resul[0].age}`;
     inputMail.value = `${resul[0].mail}`;
+    inputName.disabled = true;
     /* buttonEnviar.value = "Confirmar"
     /* buttonEnviar.className=""; */
-   /*  buttonEnviar.id="btnEditar" */ 
-} 
+    /*  buttonEnviar.id="btnEditar" */
+}
 
