@@ -29,9 +29,9 @@ function saveUser() {
     const unick = document.querySelector('#nick').value,
         uage = document.querySelector('#age').value,
         umail = document.querySelector('#mail').value;
-    if (unick.value === "" || uage.value === "" || umail.value === "") {
+        unick.required = true;
+    if (unick === "" || uage === "" || umail === "") {
         alert("Debe rellenar todos los campos")
-        console.log("asdasd")
     }
     else {
         let list = getUserList();
@@ -56,24 +56,30 @@ function saveEditUser() {
     let unick = document.querySelector('#nick').value,
         uage = document.querySelector('#age').value,
         umail = document.querySelector('#mail').value;
-    let uunick = unick;
-
-    let list = getUserList();
-    const index = list.findIndex(element => element.nick === unick);
-    const User = {
-        nick: uunick,
-        age: uage,
-        mail: umail
-    };
-    console.log(index)
-    list[index] = User;
-    localStoragelistusers(list);
-    impUser();
-    inputName = document.getElementById("nick");
-    document.querySelector('#nick').value = "";
-    document.querySelector('#age').value = "";
-    document.querySelector('#mail').value = "";
-    inputName.disabled= false;
+    
+    if(uage===""||umail==="")
+    {
+        alert("Debe rellenar todos los campos")
+    }
+    else{
+        let list = getUserList();
+        const index = list.findIndex(element => element.nick === unick);
+        const User = {
+            nick: unick,
+            age: uage,
+            mail: umail
+        };
+        console.log(index)
+        list[index] = User;
+        localStoragelistusers(list);
+        impUser();
+        inputName = document.getElementById("nick");
+        document.querySelector('#nick').value = "";
+        document.querySelector('#age').value = "";
+        document.querySelector('#mail').value = "";
+        inputName.disabled= false;
+    }
+    
 }
 
 function addUser(unick, uage, umail) {
