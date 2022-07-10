@@ -21,7 +21,8 @@ bottonEdit.forEach(element => {
 });
 
 
-document.querySelector(".nicks").style.visibility = "visible";
+document.getElementById("btnEditar").style.display = "none";
+document.querySelector(".nicks").textContent="Nick"
 //funcion ejecutada por el click  de btnenviar en la cual recibe los datos, hace una validacion, manda datos a la funcion adduser y
 //vacia los campos
 function saveUser() {
@@ -79,9 +80,9 @@ function saveEditUser() {
         document.querySelector('#age').value = "";
         document.querySelector('#mail').value = "";
         inputName.disabled= false;
-    
+        document.getElementById("btnEditar").style.display = "none";
         document.querySelector(".nicks").textContent="Nick";
-    
+        document.getElementById("btnEnviar").style.display = "";
     } 
 }
 //funcion agregar usuario, recibe los parametros, los setea en el objeto user, inserta el usuario en el array y le da un push al localstorage
@@ -173,14 +174,12 @@ function editUser(unick) {
     inputName = document.getElementById("nick");
     inputAge = document.getElementById("age");
     inputMail = document.getElementById("mail");
-     buttonEnviar = document.getElementById("btnEnviar");
     inputName.value = `${resul[0].nick}`;
     inputAge.value = `${resul[0].age}`;
     inputMail.value = `${resul[0].mail}`;
     inputName.disabled = true;
-    buttonEnviar.value = "Confirmar"
-    buttonEnviar.className="btn btn-primary mb-4"; 
-    buttonEnviar.id="btnEditar" 
+    document.getElementById("btnEnviar").style.display = "none";
+    document.getElementById("btnEditar").style.display = "";
     document.querySelector(".nicks").textContent=""
     
 
