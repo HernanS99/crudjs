@@ -21,7 +21,7 @@ bottonEdit.forEach(element => {
 });
 
 
-
+document.querySelector(".nicks").style.visibility = "visible";
 //funcion ejecutada por el click  de btnenviar en la cual recibe los datos, hace una validacion, manda datos a la funcion adduser y
 //vacia los campos
 function saveUser() {
@@ -79,6 +79,9 @@ function saveEditUser() {
         document.querySelector('#age').value = "";
         document.querySelector('#mail').value = "";
         inputName.disabled= false;
+    
+        document.querySelector(".nicks").textContent="Nick";
+    
     } 
 }
 //funcion agregar usuario, recibe los parametros, los setea en el objeto user, inserta el usuario en el array y le da un push al localstorage
@@ -134,8 +137,6 @@ function impUser() {
         inputDeleteSelect.id = list[i].nick;
         inputDeleteSelect.value = "eliminar";
         selectDeleteCell.appendChild(inputDeleteSelect);
-
-
         tbody.appendChild(row);
     }
     let bottondeletes = Array.from(document.getElementsByClassName('buttonDelete'));
@@ -180,5 +181,8 @@ function editUser(unick) {
     buttonEnviar.value = "Confirmar"
     buttonEnviar.className="btn btn-primary mb-4"; 
     buttonEnviar.id="btnEditar" 
+    document.querySelector(".nicks").textContent=""
+    
+
 }
 
