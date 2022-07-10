@@ -24,7 +24,8 @@ bottonEdit.forEach(element => {
 
 
 
-
+//funcion ejecutada por el click  de btnenviar en la cual recibe los datos, hace una validacion, manda datos a la funcion adduser y
+//vacia los campos
 function saveUser() {
     const unick = document.querySelector('#nick').value,
         uage = document.querySelector('#age').value,
@@ -52,6 +53,8 @@ function saveUser() {
     }
 }
 
+//funcion encargada de recibir los datos del usuario, validar si los campos no estan vacios,
+// guardar la edicion del usuario y vaciar los campos
 function saveEditUser() {
     let unick = document.querySelector('#nick').value,
         uage = document.querySelector('#age').value,
@@ -81,7 +84,7 @@ function saveEditUser() {
     }
     
 }
-
+//funcion agregar usuario, recibe los parametros, los setea en el objeto user, inserta el usuario en el array y le da un push al localstorage
 function addUser(unick, uage, umail) {
     const User = {
         nick: unick,
@@ -92,26 +95,18 @@ function addUser(unick, uage, umail) {
     localStoragelistusers(listUsers);
 
 }
-
+//funcion que se encarga de recibir los datos del localStorage y la vez los parsea a un array legible ya que el que recibe es un 
+//[Object objectd]
 function getUserList() {
     let storedList = localStorage.getItem('locallistusers')
-    /* if(storedList == null){
-        listUsers = [];
-    }else{
-        listUsers = JSON.parse(storedList);  
-    } */
-
     listUsers = storedList == null ? [] : JSON.parse(storedList);
-    /* listUsers = storedList == null && [] */
-
-
     return listUsers;
 }
-
+//funcion que setea los datos del arraylist dentro del localstorage
 function localStoragelistusers(ulist) {
     localStorage.setItem('locallistusers', JSON.stringify(ulist));
 }
-
+//funcion encargada de imprimir en pantalla los datos en el locaStorage y crear los botones respectivos
 function impUser() {
     let list = getUserList(),
         tbody = document.querySelector('#usersTable tbody');
@@ -162,7 +157,7 @@ function impUser() {
 }
 
 
-
+//funcion encargada de eliminar un usuario segun el id que se le entregue
 function deleteUser(unick) {
     let list = getUserList();
     let resul = list.filter(element => element.nick !== unick)
@@ -173,7 +168,7 @@ function deleteUser(unick) {
 
 
 
-
+//funcion encargada de imprimir en el formulario los datos del usuario a editar seleccionado
 function editUser(unick) {
     let list = getUserList();
     let resul = list.filter(element => element.nick === unick)
