@@ -1,5 +1,3 @@
-
-
 let listUsers = [];
 impUser();
 let editMode = false;
@@ -78,8 +76,7 @@ function saveEditUser() {
         document.querySelector('#age').value = "";
         document.querySelector('#mail').value = "";
         inputName.disabled= false;
-    }
-    
+    } 
 }
 
 function addUser(unick, uage, umail) {
@@ -180,13 +177,13 @@ function editUser(unick) {
     inputName = document.getElementById("nick");
     inputAge = document.getElementById("age");
     inputMail = document.getElementById("mail");
-    /*  buttonEnviar = document.getElementById("btnEnviar"); */
+     buttonEnviar = document.getElementById("btnEnviar");
     inputName.value = `${resul[0].nick}`;
     inputAge.value = `${resul[0].age}`;
     inputMail.value = `${resul[0].mail}`;
     inputName.disabled = true;
-    /* buttonEnviar.value = "Confirmar"
-    /* buttonEnviar.className=""; */
-    /*  buttonEnviar.id="btnEditar" */
+    buttonEnviar.value = "Confirmar"
+    buttonEnviar.className="btn btn-primary mb-4"; 
+    buttonEnviar.id="btnEditar" 
 }
 
