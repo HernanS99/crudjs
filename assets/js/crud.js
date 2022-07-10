@@ -2,8 +2,10 @@ let listUsers = [];
 impUser();
 let editMode = false;
 
-document.querySelector('#btnEnviar').addEventListener('click', saveUser)
-document.querySelector('#btnEditar').addEventListener('click', saveEditUser)
+document.querySelector('#btnEnviar').addEventListener('click', saveUser);
+document.querySelector('#btnEditar').addEventListener('click', saveEditUser);
+document.querySelector('#btnLlenar').addEventListener('click', llenadoTabla);
+document.querySelector('#btnVaciar').addEventListener('click', vaciarTabla);
 
 let bottondelete = Array.from(document.getElementsByClassName('buttonDelete'));
 
@@ -211,3 +213,19 @@ function editUser(unick) {
 
 }
 
+function llenadoTabla(){
+    addUser("Manolo","22","manolo@gmail.cl")
+    addUser("Mauricio","27","devMau@hotmail.cl")
+    addUser("Daniel","25","MERNDaniel@google.cl")
+    addUser("Hernán","22","hernan@666.cl")
+    addUser("Maria","28","Marihuana@weed.cl")
+    impUser();
+}
+
+
+function vaciarTabla()
+{
+    listUsers = [];
+    localStoragelistusers(listUsers);
+    impUser();
+}

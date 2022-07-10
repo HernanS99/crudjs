@@ -9,19 +9,15 @@
     <title>Torneo Gamer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="assets/res/parallax.min.js"></script>
-    <script src="assets/res/push.min.js"></script>
-    <link href="assets/res/notification.min.js" type="text/css" rel="stylesheet" media="screen">
 </head>
 
 <body>
     <header>
-        <div class="container "  data-z-index="-2">
+        <div class="container " data-z-index="-2">
             <div class="row text-dark">
-                <nav class="navbar navbar-expand-sm bg-light  ">
+                <nav class="navbar navbar-expand-sm bg-light">
                     <a class="navbar-brand" href="#">
                         <img src="../assets/img/logo.png" width="80" height="80" alt="">Torneo Gamer</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -33,13 +29,11 @@
                     <div class="collapse navbar-collapse" id="navbarsExample03">
                         <ul class="navbar-nav ms-auto md-3">
                             <li class="nav-item">
-                                <a class="nav-link active" href="" tabindex="-1"
-                                    aria-disabled="true">Inicio</a>
+                                <a class="nav-link active" href="" tabindex="-1" aria-disabled="true">Inicio</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="" tabindex="-1"
-                                    aria-disabled="true">Formulario</a>
+                                <a class="nav-link" href="" tabindex="-1" aria-disabled="true">Formulario</a>
                             </li>
                         </ul>
                     </div>
@@ -105,7 +99,16 @@
         <section>
             <div class="container" data-z-index="-1">
                 <div class="row">
+                    <div class="col-xl-6 text-center d-grid gap-1">
+                        <input type="button" id="btnVaciar" class="btn btn-primary mb-4" value="Vaciar usuarios"></input>
+                    </div>
+                    <div class="col-xl-6 text-center d-grid gap-1">
+                        <input type="button" id="btnLlenar" class="btn btn-primary mb-4" value="Llenar tabla"></input>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xl-12 table-responsive">
+
                         <table class="table" id="usersTable">
                             <thead>
                                 <tr>
@@ -163,15 +166,14 @@
             </footer>
         </div>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="assets/res/parallax.min.js"></script>
     <script src="assets/js/sweetAlert.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="../assets/js/crud.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
 </body>
 
