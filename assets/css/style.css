@@ -47,3 +47,5 @@
     .input:is(:focus, :valid) {
         outline-color: #000;
     }
+
+    

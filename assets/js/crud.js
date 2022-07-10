@@ -31,15 +31,30 @@ function saveUser() {
         umail = document.querySelector('#mail').value;
         unick.required = true;
     if (unick === "" || uage === "" || umail === "") {
-        alert("Debe rellenar todos los campos")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No olvides rellenar todos los campos!',
+          })
     }
     else {
+        Swal.fire({
+            position: 'bottom-end',
+            icon: 'success',
+            title: 'Usuario ingresado correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          })
         let list = getUserList();
         let resul = list.filter(function (list) {
             return list.nick === unick
         })
         if (resul.length > 0) {
-            alert("Nick ya ingresado")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Nick ya ingresado',
+              })
         } else {
             addUser(unick, uage, umail);
             impUser();
@@ -61,9 +76,20 @@ function saveEditUser() {
     
     if(uage===""||umail==="")
     {
-        alert("Debe rellenar todos los campos")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No olvides rellenar todos los campos!',
+          })
     }
     else{
+        Swal.fire({
+            position: 'bottom-end',
+            icon: 'success',
+            title: 'Usuario editado correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          })
         let list = getUserList();
         const index = list.findIndex(element => element.nick === unick);
         const User = {
