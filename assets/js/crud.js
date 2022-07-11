@@ -223,6 +223,13 @@ function saveEditUser() {
 
     //funcion encargada de eliminar un usuario segun el id que se le entregue
     function deleteUser(unick) {
+        Swal.fire({
+            position: 'bottom-end',
+            icon: 'success',
+            title: 'Usuario eliminado    correctamente',
+            showConfirmButton: false,
+            timer: 1500
+        })
         let list = getUserList();
         let resul = list.filter(element => element.nick !== unick)
         localStoragelistusers(resul);
