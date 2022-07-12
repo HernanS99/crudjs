@@ -1,16 +1,17 @@
 let listUsers = [];
 impUser();
 
-document.querySelector('#btnEnviar').addEventListener('click', saveUser);
-document.querySelector('#btnEditar').addEventListener('click', saveEditUser);
-document.querySelector('#btnLlenar').addEventListener('click', fillTable);
+document.querySelector('#btnSend').addEventListener('click', saveUser);
+document.querySelector('#btnEdit').addEventListener('click', saveEditUser);
+/* document.querySelector('#btnLlenar').addEventListener('click', fillTable);
 document.querySelector('#btnVaciar').addEventListener('click', clearTable);
-
+ */
 botonAddLi();
 
-document.getElementById("btnEditar").style.display = "none";
+document.getElementById("btnEdit").style.display = "none";
 document.querySelector(".nicks").textContent = "Nick"
-//funcion ejecutada por el click  de btnenviar en la cual recibe los datos, hace una validacion, manda datos a la funcion adduser y
+
+//funcion ejecutada por el click  de btnSend en la cual recibe los datos, hace una validacion, manda datos a la funcion adduser y
 //vacia los campos
 function saveUser() {
     const unick = document.querySelector('#nick').value,
@@ -91,9 +92,9 @@ function saveEditUser() {
                 document.querySelector('#age').value = "";
                 document.querySelector('#mail').value = "";
                 inputName.disabled = false;
-                document.getElementById("btnEditar").style.display = "none";
+                document.getElementById("btnEdit").style.display = "none";
                 document.querySelector(".nicks").textContent = "Nick";
-                document.getElementById("btnEnviar").style.display = "";
+                document.getElementById("btnSend").style.display = "";
             }else{
                 alertx("Debe ingresar un correo valido");
             }
@@ -131,7 +132,7 @@ function impUser() {
     let list = getUserList(),
         tbody = document.querySelector('#usersTable tbody');
     tbody.innerHTML = '';
-    for (let i = 0; i < list.length; i++) {
+    list.forEach(function(element,i){
         let row = tbody.insertRow(i);
         let nickCell = row.insertCell(0);
         let ageCell = row.insertCell(1);
@@ -142,12 +143,10 @@ function impUser() {
         nickCell.innerHTML = list[i].nick.slice(0,15)+bool;
         ageCell.innerHTML = list[i].age;
         mailCell.innerHTML = list[i].mail;
-
         createButton("buttonEdit","editar",list[i].nick,selectEditCell)
         createButton("buttonDelete","eliminar",list[i].nick,selectDeleteCell)
-
         tbody.appendChild(row);
-    }
+    })
     botonAddLi();
 }
 
@@ -158,7 +157,6 @@ function createButton (button,value,id,selec) {
     inputSelect.id = id;
     inputSelect.value = value;
     selec.appendChild(inputSelect);
-
 }
 
 //funcion encargada de eliminar un usuario segun el id que se le entregue
@@ -195,18 +193,38 @@ function editUser(unick) {
     let inputName = document.getElementById("nick");
     let inputAge = document.getElementById("age");
     let inputMail = document.getElementById("mail");
-    inputName.value = `${resul[0].nick}`;
-    inputAge.value = `${resul[0].age}`;
-    inputMail.value = `${resul[0].mail}`;
+    inputName.value = resul[0].nick;
+    inputAge.value = resul[0].age;
+    inputMail.value = resul[0].mail;
     inputName.disabled = true;
-    document.getElementById("btnEnviar").style.display = "none";
-    document.getElementById("btnEditar").style.display = "";
+    document.getElementById("btnSend").style.display = "none";
+    document.getElementById("btnEdit").style.display = "";
     document.querySelector(".nicks").textContent = ""
-
-
 }
 
-function fillTable() {
+
+function alertx(text) {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text
+    })
+}
+
+function botonAddLi(){
+    let bottondeletes = Array.from(document.getElementsByClassName('buttonDelete'));
+    bottondeletes.forEach(element => {
+        element.addEventListener('click', (event) => deleteUser(event.target.id))
+    });
+    let bottonEdit = Array.from(document.getElementsByClassName('buttonEdit'));
+    bottonEdit.forEach(element => {
+        element.addEventListener('click', (event) => editUser(event.target.id))
+    });
+}
+
+
+//Funcion de llenado y vaciado de tablas
+/* function fillTable() {
     let list = getUserList();
     if (!list.length) {
         addUser("Manolo", "22", "manolo@gmail.cl")
@@ -223,25 +241,4 @@ function clearTable() {
     listUsers = [];
     localStoragelistusers(listUsers);
     impUser();
-}
-
-function alertx(text) {
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text
-    })
-}
-
-function botonAddLi(){
-    let bottondeletes = Array.from(document.getElementsByClassName('buttonDelete'));
-    bottondeletes.forEach(element => {
-        element.addEventListener('click', (event) => deleteUser(event.target.id))
-    });
-    let bottonEdit = Array.from(document.getElementsByClassName('buttonEdit'));
-
-    bottonEdit.forEach(element => {
-
-        element.addEventListener('click', (event) => editUser(event.target.id))
-    });
-}
+} */
