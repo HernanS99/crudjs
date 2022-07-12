@@ -132,7 +132,7 @@ function impUser() {
     let list = getUserList(),
         tbody = document.querySelector('#usersTable tbody');
     tbody.innerHTML = '';
-    list.forEach(function(element,i){
+    list.forEach((element,i) => {
         let row = tbody.insertRow(i);
         let nickCell = row.insertCell(0);
         let ageCell = row.insertCell(1);
