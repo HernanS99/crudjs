@@ -143,17 +143,17 @@ function impUser() {
         nickCell.innerHTML = list[i].nick.slice(0,15)+bool;
         ageCell.innerHTML = list[i].age;
         mailCell.innerHTML = list[i].mail;
-        createButton("buttonEdit","editar",list[i].nick,selectEditCell)
-        createButton("buttonDelete","eliminar",list[i].nick,selectDeleteCell)
+        createButton("buttonEdit","editar",list[i].nick,selectEditCell,"btn-primary")
+        createButton("buttonDelete","eliminar",list[i].nick,selectDeleteCell,"btn-danger")
         tbody.appendChild(row);
     })
     botonAddLi();
 }
 
-function createButton (button,value,id,selec) {
+function createButton (button,value,id,selec,btnColor) {
     let inputSelect = document.createElement('input')
     inputSelect.type = "button";
-    inputSelect.className = `${button} btn btn-primary`;
+    inputSelect.className = `${button} btn ${btnColor}`;
     inputSelect.id = id;
     inputSelect.value = value;
     selec.appendChild(inputSelect);
