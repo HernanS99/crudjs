@@ -3,10 +3,10 @@
 Proyecto CRUD JS
 
 
-Segundo proyecto de UDD BOOTCAMP en el cual hice un crud y la manipulacion del dom que esto conlleva.
+Segundo proyecto de UDD BOOTCAMP: procedí a elaborar un crud y con ello la manipulación del DOM correspondiente.
 
 Utilice Bootstrap, css, html y js con el almacenamiento Local.storage.
 
-Aprendi bastante javascript en este proyecto, fue harto tiempo y dedicacion que inverti para que todo saliera a la perfeccion.
+Fue una experiencia en donde aprendí bastante. Se invirtió una cantidad de tiempo y dedicación importante, todo esto necesario para lograr un proyecto de alta calidad.
 
 link: https://hernans99.github.io/crudjs/
