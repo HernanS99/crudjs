@@ -1,6 +1,6 @@
 # crudjs
 
-                                                                  Proyecto CRUD JS
+Proyecto CRUD JS
 
 
 Segundo proyecto de UDD BOOTCAMP en el cual hice un crud y la manipulacion del dom que esto conlleva.
