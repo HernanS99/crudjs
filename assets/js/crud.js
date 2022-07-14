@@ -11,13 +11,13 @@ botonAddLi();
 document.getElementById("btnEdit").style.display = "none";
 document.querySelector(".nicks").textContent = "Nick"
 
+
 //funcion ejecutada por el click  de btnSend en la cual recibe los datos, hace una validacion, manda datos a la funcion adduser y
 //vacia los campos
 function saveUser() {
     const unick = document.querySelector('#nick').value,
         uage = document.querySelector('#age').value,
         umail = document.querySelector('#mail').value;
-    unick.required = true;
     if (unick === "" || uage === "" || umail === "") {
         alertx("No olvides rellenar todos los campos");
     }
@@ -27,13 +27,7 @@ function saveUser() {
         if (agee >= 18 && agee <= 100) {
             if (emailRegex.test(umail)) {
 
-                Swal.fire({
-                    position: 'bottom-end',
-                    icon: 'success',
-                    title: 'Usuario ingresado correctamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                
                 let list = getUserList();
                 let resul = list.filter(function (list) {
                     return list.nick === unick
@@ -46,6 +40,13 @@ function saveUser() {
                     document.querySelector('#nick').value = "";
                     document.querySelector('#age').value = "";
                     document.querySelector('#mail').value = "";
+                    Swal.fire({
+                        position: 'bottom-end',
+                        icon: 'success',
+                        title: 'Usuario ingresado correctamente',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
             }else{
                 alertx("Debe ingresar un correo valido");
@@ -56,64 +57,17 @@ function saveUser() {
     }
 }
 
-//funcion encargada de recibir los datos del usuario, validar si los campos no estan vacios,
-// guardar la edicion del usuario y vaciar los campos
-function saveEditUser() {
-    let unick = document.querySelector('#nick').value,
-        uage = document.querySelector('#age').value,
-        umail = document.querySelector('#mail').value;
-
-    if (uage === "" || umail === "") {
-        alertx("Debe rellenar todos los campos");
-    }else{
-        let agee = parseInt(document.querySelector('#age').value);
-        if (agee >= 18 && agee <= 100) {
-            let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-            if (emailRegex.test(umail)) {
-                Swal.fire({
-                    position: 'bottom-end',
-                    icon: 'success',
-                    title: 'Usuario editado correctamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                let list = getUserList();
-                const index = list.findIndex(element => element.nick === unick);
-                const User = {
-                    nick: unick,
-                    age: uage,
-                    mail: umail
-                };
-                list[index] = User;
-                localStoragelistusers(list);
-                impUser();
-                inputName = document.getElementById("nick");
-                document.querySelector('#nick').value = "";
-                document.querySelector('#age').value = "";
-                document.querySelector('#mail').value = "";
-                inputName.disabled = false;
-                document.getElementById("btnEdit").style.display = "none";
-                document.querySelector(".nicks").textContent = "Nick";
-                document.getElementById("btnSend").style.display = "";
-            }else{
-                alertx("Debe ingresar un correo valido");
-            }
-        }else{
-            alertx("Debe ingresar una edad valida");
-        }
-    }
-}
-    //funcion agregar usuario, recibe los parametros, los setea en el objeto user, inserta el usuario en el array y le da un push al localstorage
+//funcion agregar usuario, recibe los parametros, los setea en el objeto user, inserta el usuario en el array y le da un push al localstorage
 function addUser(nick, age, mail) {
     const User = {
-        nick,
-        age,
-        mail
+            nick,
+            age,
+            mail
     };
     listUsers.push(User);
     localStoragelistusers(listUsers);
-
 }
+
 //funcion que se encarga de recibir los datos del localStorage y la vez los parsea a un array legible ya que el que recibe es un 
 //[Object objectd]
 function getUserList() {
@@ -201,16 +155,55 @@ function editUser(unick) {
     document.getElementById("btnEdit").style.display = "";
     document.querySelector(".nicks").textContent = ""
 }
+//funcion encargada de recibir los datos del usuario, validar si los campos no estan vacios,
+// guardar la edicion del usuario y vaciar los campos
+function saveEditUser() {
+    let unick = document.querySelector('#nick').value,
+        uage = document.querySelector('#age').value,
+        umail = document.querySelector('#mail').value;
 
-
-function alertx(text) {
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text
-    })
+    if (uage === "" || umail === "") {
+        alertx("Debe rellenar todos los campos");
+    }else{
+        let agee = parseInt(document.querySelector('#age').value);
+        if (agee >= 18 && agee <= 100) {
+            let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+            if (emailRegex.test(umail)) {
+                Swal.fire({
+                    position: 'bottom-end',
+                    icon: 'success',
+                    title: 'Usuario editado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                let list = getUserList();
+                const index = list.findIndex(element => element.nick === unick);
+                const User = {
+                    nick: unick,
+                    age: uage,
+                    mail: umail
+                };
+                list[index] = User;
+                localStoragelistusers(list);
+                impUser();
+                inputName = document.getElementById("nick");
+                document.querySelector('#nick').value = "";
+                document.querySelector('#age').value = "";
+                document.querySelector('#mail').value = "";
+                inputName.disabled = false;
+                document.getElementById("btnEdit").style.display = "none";
+                document.querySelector(".nicks").textContent = "Nick";
+                document.getElementById("btnSend").style.display = "";
+            }else{
+                alertx("Debe ingresar un correo valido");
+            }
+        }else{
+            alertx("Debe ingresar una edad valida");
+        }
+    }
 }
 
+//Funcion encargada de agregar boton dellete yt edit
 function botonAddLi(){
     let bottondeletes = Array.from(document.getElementsByClassName('buttonDelete'));
     bottondeletes.forEach(element => {
@@ -221,6 +214,18 @@ function botonAddLi(){
         element.addEventListener('click', (event) => editUser(event.target.id))
     });
 }
+
+
+
+//funcion encargada de las alertas
+function alertx(text) {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text
+    })
+}
+
 
 
 //Funcion de llenado y vaciado de tablas
